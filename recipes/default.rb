@@ -22,7 +22,7 @@ directory "/opt/popHealth" do
   recursive true
 end
 
-git "popHealth master" do
+git "popHealth #{node[:popHealth][:branch]}" do
   repository "https://github.com/pophealth/popHealth.git"
   destination "/opt/popHealth"
   revision node[:popHealth][:branch]
