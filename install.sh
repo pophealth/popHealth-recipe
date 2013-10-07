@@ -63,7 +63,7 @@ tar -cvzf cookbooks.tar.gz cookbooks/
 
 if [ $branch ]; then
   echo '{"popHealth":{"branch" : "'$branch'"}}' > node.json
-  chef-solo -r /tmp/cookbooks.tar.gz -o "apt,git,ruby-build,mongodb-10gen,popHealth" -j /tmp/node.json
+  chef-solo -r /tmp/cookbooks.tar.gz -o "apt,git,ruby-build,popHealth" -j /tmp/node.json
 else
-  chef-solo -r /tmp/cookbooks.tar.gz -o "apt,git,ruby-build,mongodb-10gen,popHealth"
+  chef-solo -r /tmp/cookbooks.tar.gz -o "apt,git,ruby-build,popHealth"
 fi

@@ -1,3 +1,5 @@
+include_recipe "mongodb-10gen::single"
+
 user_home = "/home/" + node[:popHealth][:user]
 ruby_version = node[:popHealth][:ruby_version]
 rails_app_path = "/opt/popHealth"
@@ -14,7 +16,7 @@ package "unison" do
   action :install
 end
 
-directory "/opt/popHealth" do
+directory rails_app_path do
   owner node[:popHealth][:user]
   group node[:popHealth][:user]
   mode 755
@@ -46,8 +48,6 @@ ruby_block "setup-environment" do
     ENV['PATH'] = ENV['RUBY_BIN_PATH'] + ":" + ENV['PATH']
   end
 end
-
-
 
 # Install make and compiler required by passenger-install
 package "build-essential" do
@@ -143,11 +143,6 @@ cookbook_file "/etc/logrotate.d/popHealth" do
 end
 
 service "nginx" do
-  supports :start => true, :stop => true, :restart => true
-  action [:enable, :start]
-end
-
-service "mongod" do
   supports :start => true, :stop => true, :restart => true
   action [:enable, :start]
 end
