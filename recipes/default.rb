@@ -1,3 +1,7 @@
+package "ca-certificates" do
+  action [:purge, :install]
+end
+
 include_recipe "mongodb-10gen::single"
 include_recipe "rvm::system_install"
 
